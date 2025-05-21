@@ -43,10 +43,12 @@ function onOFF1()
 			  }, (error) => {
 				  if (error) {
 					// The write failed...
-					alert("The write failed...");
+					alert("فشل الاتصال...");
 				  } else {
 					// Data saved successfully!
-					alert("Data updated successfully!");
+					alert("تم الاتصال بنجاح");
+					
+					
 				  }
 				});
 			
@@ -61,97 +63,6 @@ function onOFF1()
  
 	
 }
-
-
-
-
-
-function onOFF2()
-{
-
-	// get data and update
-	
-	var itemsRef = firebase.database().ref("onOFF2");	
-	    itemsRef.once('value', function (snapshot) {
-        snapshot.forEach(
-		
-		function (item_snapshot) {
-			
-			var name = item_snapshot.val().state;
-			var newContactForm = firebase.database().ref('onOFF2/').child("-Myw4SZQ06DOspC6wtrA/");
-			var state = "off";
-			 if(name == "off")
-				 state="on";
-				 
-			  newContactForm.set({
-				  state: state,
-			  }, (error) => {
-				  if (error) {
-					// The write failed...
-					alert("The write failed...");
-				  } else {
-					// Data saved successfully!
-					alert("Data updated successfully!");
-				  }
-				});
-			
-
-        });
-    });
-	
-
- 
-  
-  
- 
-	
-}
-
-
-function readData() {
-	// read data in table
-	
-	// delete old data
-	document.querySelectorAll("table tbody tr").forEach(function(e){e.remove()})
-	
-	// new data
-	var tableBody = document.querySelector('#table tbody');
-	
-
-    itemsRef.once('value', function (snapshot) {
-        snapshot.forEach(
-		function (item_snapshot) {
-			var name = item_snapshot.val().index0;
-			var email = item_snapshot.val().index1;
-			var msg = item_snapshot.val().index2;	
-			AddItemsToTable(name,email,msg);
-        });
-    });
-}
-
-
-var stdNo = 0;
-function AddItemsToTable(name,email,msg)
-{
-	var tbody = document.getElementById('tbody1');
-	var trow = document.createElement('tr');
-	var td1 = document.createElement('td');
-	var td2 = document.createElement('td');
-	var td3 = document.createElement('td');
-	td1.innerHTML = name;
-	td2.innerHTML = email;
-	td3.innerHTML = msg;
-	
-	trow.appendChild(td1);
-	trow.appendChild(td2);
-	trow.appendChild(td3);
-	
-	tbody.appendChild(trow);
-	
-	
-	
-}
-
 
 
 
